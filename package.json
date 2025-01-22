@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npx cucumber-js",
     "test:all": "npm run clean && cucumber-js --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/cucumber-report.html",
-    "test:api1": "npx cucumber-js --profile api1",
+    "test:api1": "npx cucumber-js --profile api1 --format html:reports/cucumber-report.html && npx playwright show-report",
     "test:secondApi": "cucumber-js src/secondApi/**/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/secondApi-report.html",
     "test:product": "cucumber-js src/firstApi/products/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/product-report.html",
     "test:order": "cucumber-js src/secondApi/orders/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/order-report.html",
@@ -21,6 +21,7 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write \"src/**/*.{ts,feature}\"",
     "pretest": "npm run clean",
+    "show-report": "npx playwright show-report reports/playwright-report",
     "report": "open reports/cucumber-report.html",
     "report:firstApi": "open reports/firstApi-report.html",
     "report:secondApi": "open reports/secondApi-report.html"
@@ -34,8 +35,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.39.0",
+    "@cucumber/html-formatter": "^21.8.0",
+    "@playwright/test": "^1.49.1",
     "dotenv": "^16.0.3",
+    "playwright": "^1.49.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
