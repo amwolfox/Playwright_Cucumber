@@ -1,0 +1,56 @@
+{
+  "name": "auto",
+  "version": "1.0.0",
+  "description": "API Testing Framework using Playwright and Cucumber",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cucumber-js",
+    "test:all": "npm run clean && cucumber-js --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/cucumber-report.html",
+    "test:api1": "npx cucumber-js --profile api1",
+    "test:secondApi": "cucumber-js src/secondApi/**/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/secondApi-report.html",
+    "test:product": "cucumber-js src/firstApi/products/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/product-report.html",
+    "test:order": "cucumber-js src/secondApi/orders/*.feature --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/order-report.html",
+    "test:smoke": "cucumber-js --tags @smoke --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/smoke-report.html",
+    "test:regression": "cucumber-js --tags @regression --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/regression-report.html",
+    "test:parallel": "cucumber-js --parallel 2 --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/parallel-report.html",
+    "test:debug": "node --inspect-brk ./node_modules/@cucumber/cucumber/bin/cucumber-js",
+    "test:staged": "cross-env NODE_ENV=staging cucumber-js --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/staged-report.html",
+    "test:prod": "cross-env NODE_ENV=production cucumber-js --require-module ts-node/register --require 'src/**/*.ts' --format progress --format html:reports/prod-report.html",
+    "clean": "rimraf reports/*.html",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write \"src/**/*.{ts,feature}\"",
+    "pretest": "npm run clean",
+    "report": "open reports/cucumber-report.html",
+    "report:firstApi": "open reports/firstApi-report.html",
+    "report:secondApi": "open reports/secondApi-report.html"
+  },
+  "keywords": [
+    "api-testing",
+    "playwright",
+    "cucumber",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.39.0",
+    "dotenv": "^16.0.3",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^8.11.1",
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.0.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.5"
+  }
+}
